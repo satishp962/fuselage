@@ -36,7 +36,7 @@
     "node": "14.17.6",
     "yarn": "1.22.11"
   },
-  "packageManager": "yarn@3.1.0",
+  "packageManager": "yarn@3.1.1",
   "turbo": {
     "baseBranch": "origin/master",
     "pipeline": {
