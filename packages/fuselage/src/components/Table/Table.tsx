@@ -1,5 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
 
+import { TableBody, TableCell, TableFoot, TableHead, TableRow } from '.';
 import { Box } from '../Box';
 import { TableSelection } from './TableSelection';
 import { TableSelectionButton } from './TableSelectionButton';
@@ -16,9 +17,14 @@ export type TableProps = ComponentProps<typeof Box> & {
 };
 
 export const Table: FC<TableProps> & {
-  Selection: ComponentProps<typeof TableSelection>;
-  Button: ComponentProps<typeof TableSelectionButton>;
-} = ({ striped, sticky, fixed = false, ...props }) => (
+  Head?: ComponentProps<typeof TableHead>;
+  Body?: ComponentProps<typeof TableBody>;
+  Foot?: ComponentProps<typeof TableFoot>;
+  Row?: ComponentProps<typeof TableRow>;
+  Cell?: ComponentProps<typeof TableCell>;
+  Selection?: ComponentProps<typeof TableSelection>;
+  Button?: ComponentProps<typeof TableSelectionButton>;
+} = ({ striped, sticky, fixed = false, ...props }: TableProps) => (
   <Box rcx-table__wrapper>
     <Box
       is='table'

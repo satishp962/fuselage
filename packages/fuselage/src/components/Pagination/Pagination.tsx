@@ -51,7 +51,7 @@ export const Pagination: FC<PaginationProps> = ({
   onSetCurrent,
   divider,
   ...props
-}) => {
+}: PaginationProps) => {
   const itemsPerPageOptions = [25, 50, 100].filter((i) => i <= count);
   const hasItemsPerPageSelection = itemsPerPageOptions.length > 1;
   const currentPage = Math.floor(current / itemsPerPage);

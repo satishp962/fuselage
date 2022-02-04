@@ -1,12 +1,14 @@
+import { useMergedRefs } from '@rocket.chat/fuselage-hooks';
 import React, {
   ComponentProps,
   ElementType,
   forwardRef,
   memo,
-  MutableRefObject,
   SyntheticEvent,
   useLayoutEffect,
   useMemo,
+  Ref,
+  useRef,
 } from 'react';
 
 import { Box, Scrollable } from '../Box';
@@ -32,7 +34,7 @@ type OptionsProps = Omit<ComponentProps<typeof Box>, 'onSelect'> & {
 
 export const Empty = memo(() => <Option label='Empty' />);
 
-export const Options = forwardRef<HTMLElement, OptionsProps>(
+export const Options = forwardRef(
   (
     {
       maxHeight = '144px',
@@ -43,13 +45,18 @@ export const Options = forwardRef<HTMLElement, OptionsProps>(
       renderItem: OptionComponent = Option,
       onSelect,
       ...props
-    },
-    ref
+    }: OptionsProps,
+    ref: Ref<HTMLElement>
   ) => {
-    const { current } = ref as MutableRefObject<HTMLLIElement>;
+    const innerRef = useRef<HTMLElement>(null);
+    const mergedRef = useMergedRefs(innerRef, ref);
+    const { current } = innerRef;
 
     useLayoutEffect(() => {
-      const li = current?.querySelector<HTMLLIElement>('.rcx-option--focus');
+      if (!current) {
+        return;
+      }
+      const li = current?.querySelector<HTMLElement>('.rcx-option--focus');
       if (!li) {
         return;
       }
@@ -85,7 +92,7 @@ export const Options = forwardRef<HTMLElement, OptionsProps>(
         <Tile padding={0} paddingBlock={'x12'} paddingInline={0} elevation='2'>
           <Scrollable vertical smooth>
             <Tile
-              ref={ref}
+              ref={mergedRef}
               elevation='0'
               padding='none'
               maxHeight={maxHeight}

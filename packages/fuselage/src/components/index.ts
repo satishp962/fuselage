@@ -44,6 +44,7 @@ export { default as Sidebar } from './Sidebar';
 export * from './Sidebar';
 export * from './Skeleton';
 export * from './States';
+export { default as Table } from './Table';
 export * from './Table';
 export * from './Tabs';
 export * from './Tag';

@@ -18,7 +18,7 @@ import {
 } from '..';
 import type { Option as OptionType } from '../Options/useCursor';
 
-type MenuProps = Omit<ComponentProps<typeof ActionButton>, 'icon'> & {
+export type MenuProps = Omit<ComponentProps<typeof ActionButton>, 'icon'> & {
   icon?: string;
   options: {
     [id: string]: {

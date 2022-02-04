@@ -7,13 +7,13 @@ import { size } from '../../styleTokens';
 import { Box } from '../Box';
 import { iconsList } from './IconsList';
 
-type IconProps = Omit<ComponentProps<typeof Box>, 'size'> & {
+export type IconProps = Omit<ComponentProps<typeof Box>, 'size'> & {
   name: Keys;
   size?: ComponentProps<typeof Box>['width'];
 };
 
 export const Icon = forwardRef<HTMLInputElement, IconProps>(function Icon(
-  { name, size, ...props },
+  { name, size, ...props }: IconProps,
   ref
 ) {
   return (

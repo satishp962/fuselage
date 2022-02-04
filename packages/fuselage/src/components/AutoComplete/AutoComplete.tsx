@@ -23,10 +23,13 @@ import { Option } from '../Options/useCursor';
 type OptionValue = string | number;
 type OptionType = {
   value: OptionValue;
-  label?: string | number;
+  label: string;
 };
 
-type AutoCompleteProps = Omit<ComponentProps<typeof Options>, 'options'> & {
+export type AutoCompleteProps = Omit<
+  ComponentProps<typeof Options>,
+  'options'
+> & {
   value: OptionValue;
   filter: string;
   setFilter?: (filter: string) => void;
@@ -61,7 +64,7 @@ export const AutoComplete: FC<AutoCompleteProps> = ({
   placeholder,
   error,
   disabled,
-}) => {
+}: AutoCompleteProps) => {
   const { ref: containerRef, borderBoxSize } = useResizeObserver();
 
   const ref = useRef<HTMLElement>(null);

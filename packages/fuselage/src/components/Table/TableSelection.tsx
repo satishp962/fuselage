@@ -12,7 +12,7 @@ export const TableSelection: FC<TableSelectionProps> = ({
   children,
   text,
   ...props
-}) => (
+}: TableSelectionProps) => (
   <Box
     color='alternative'
     rcx-table__selection
