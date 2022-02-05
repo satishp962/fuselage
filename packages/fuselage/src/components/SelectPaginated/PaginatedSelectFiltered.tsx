@@ -1,8 +1,15 @@
 import { useMutableCallback } from '@rocket.chat/fuselage-hooks';
-import React, { FC, useCallback, useState } from 'react';
+import React, {
+  ComponentProps,
+  FC,
+  FormEvent,
+  forwardRef,
+  useCallback,
+  useState,
+} from 'react';
 
 import { PaginatedSelect, PaginatedSelectProps } from '.';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 
 type PaginatedSelectFilteredProps = PaginatedSelectProps;
 
@@ -15,7 +22,7 @@ export const PaginatedSelectFiltered: FC<PaginatedSelectFilteredProps> = ({
 }) => {
   const [filter, setFilter] = useState('');
   const anchor = useCallback(
-    React.forwardRef<HTMLInputElement, PaginatedSelectFilteredProps>(
+    forwardRef<HTMLInputElement, ComponentProps<typeof InputBox.Input>>(
       ({ children, filter, ...props }, ref) => (
         <InputBox.Input
           mi='x4'
@@ -24,7 +31,9 @@ export const PaginatedSelectFiltered: FC<PaginatedSelectFilteredProps> = ({
           ref={ref}
           placeholder={placeholder}
           value={filter}
-          onChange={useMutableCallback((e) => setFilter(e.currentTarget.value))}
+          onChange={useMutableCallback((e: FormEvent<HTMLInputElement>) =>
+            setFilter(e.currentTarget.value)
+          )}
           {...props}
           rcx-input-box--undecorated
         />
@@ -34,7 +43,7 @@ export const PaginatedSelectFiltered: FC<PaginatedSelectFilteredProps> = ({
   );
   return (
     <PaginatedSelect
-      placeholder={null}
+      placeholder={undefined}
       filter={filter}
       options={options}
       {...props}

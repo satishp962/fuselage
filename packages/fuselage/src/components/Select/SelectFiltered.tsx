@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 
 import { Select } from '.';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 
 export type SelectFilteredProps = Omit<
   ComponentProps<typeof Select>,
@@ -28,7 +28,7 @@ export const SelectFiltered = forwardRef<HTMLInputElement, SelectFilteredProps>(
             placeholder={placeholder}
             value={filter}
             onChange={useMutableCallback((e) =>
-              setFilter(e.currentTarget.value)
+              setFilter((e.currentTarget as HTMLInputElement).value)
             )}
             {...props}
             rcx-input-box--undecorated
@@ -41,7 +41,7 @@ export const SelectFiltered = forwardRef<HTMLInputElement, SelectFilteredProps>(
     return (
       <Select
         ref={ref}
-        placeholder={null}
+        placeholder={undefined}
         filter={filter}
         options={options}
         {...props}

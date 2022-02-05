@@ -9,7 +9,8 @@ export const style = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-};
+} as const;
+
 export type TableProps = ComponentProps<typeof Box> & {
   striped?: boolean;
   sticky?: boolean;
@@ -17,13 +18,13 @@ export type TableProps = ComponentProps<typeof Box> & {
 };
 
 export const Table: FC<TableProps> & {
-  Head?: ComponentProps<typeof TableHead>;
-  Body?: ComponentProps<typeof TableBody>;
-  Foot?: ComponentProps<typeof TableFoot>;
-  Row?: ComponentProps<typeof TableRow>;
-  Cell?: ComponentProps<typeof TableCell>;
-  Selection?: ComponentProps<typeof TableSelection>;
-  Button?: ComponentProps<typeof TableSelectionButton>;
+  Head?: FC<ComponentProps<typeof TableHead>>;
+  Body?: FC<ComponentProps<typeof TableBody>>;
+  Foot?: FC<ComponentProps<typeof TableFoot>>;
+  Row?: FC<ComponentProps<typeof TableRow>>;
+  Cell?: FC<ComponentProps<typeof TableCell>>;
+  Selection?: FC<ComponentProps<typeof TableSelection>>;
+  Button?: FC<ComponentProps<typeof TableSelectionButton>>;
 } = ({ striped, sticky, fixed = false, ...props }: TableProps) => (
   <Box rcx-table__wrapper>
     <Box

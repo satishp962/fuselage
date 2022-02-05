@@ -6,7 +6,6 @@ import React, {
   ComponentProps,
   ElementType,
   forwardRef,
-  ForwardRefExoticComponent,
   memo,
   Ref,
   SyntheticEvent,
@@ -23,25 +22,32 @@ const prevent = (e: SyntheticEvent) => {
   e.stopPropagation();
 };
 
-type OptionsPaginatedProps = Omit<ComponentProps<typeof Box>, 'onSelect'> & {
+type OptionsPaginatedProps = Omit<
+  ComponentProps<typeof Box>,
+  'onSelect' | 'ref'
+> & {
   multiple?: boolean;
   options: { value: unknown; label: string; selected?: boolean }[];
   cursor: number;
   renderItem?: ElementType;
   renderEmpty?: ElementType;
   onSelect: (option: [unknown, string]) => void;
+  endReached?: (index: number) => void;
 };
 
 export const Empty = memo(() => <Option label='Empty' />);
 
-export const CheckOption: ForwardRefExoticComponent<OptionsPaginatedProps> =
-  memo(function CheckOption({ selected, children: label, ...options }) {
-    return (
-      <Option label={label as string} selected={selected} {...options}>
-        <CheckBox checked={selected} />
-      </Option>
-    );
-  });
+export const CheckOption = memo(function CheckOption({
+  selected,
+  children: label,
+  ...options
+}: OptionsPaginatedProps) {
+  return (
+    <Option label={label as string} selected={selected} {...options}>
+      <CheckBox checked={selected} />
+    </Option>
+  );
+});
 
 export const OptionsPaginated = forwardRef<Ref<Element>, OptionsPaginatedProps>(
   (

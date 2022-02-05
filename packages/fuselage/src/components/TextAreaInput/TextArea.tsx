@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 
 import { Box } from '../Box';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 
 type TextAreaInputProps = Omit<ComponentProps<typeof Box>, 'type'> & {
   addon?: ReactNode;

@@ -15,7 +15,7 @@ import React, {
 import { Box, PositionAnimated, AnimatedVisibility } from '../Box';
 import Chip from '../Chip';
 import { Icon } from '../Icon';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 import Margins from '../Margins';
 import { useCursor, Options } from '../Options';
 import { Option } from '../Options/useCursor';
@@ -124,7 +124,7 @@ export const AutoComplete: FC<AutoCompleteProps> = ({
           <InputBox.Input
             ref={ref}
             onChange={useMutableCallback((e) =>
-              setFilter(e.currentTarget.value)
+              setFilter((e.currentTarget as HTMLInputElement).value)
             )}
             onBlur={hide}
             onFocus={show}

@@ -4,21 +4,8 @@ import { Box } from '../Box';
 import { Label } from '../Label';
 
 type ToggleSwitchProps = ComponentPropsWithoutRef<typeof Box> & {
-  'autoComplete'?: string;
-  'checked': boolean;
-  'defaultChecked': boolean;
-  'disabled': boolean;
-  'form': string;
-  'id': string;
-  'name': string;
-  'required': boolean;
-  'tabIndex': number;
-  'value': string;
-  'qa': string;
-  'data-qa': string;
-  'onChange': (value: unknown, action: unknown | undefined) => void;
-  'onInput': (value: unknown, action: unknown | undefined) => void;
-  'onInvalid': (value: unknown, action: unknown | undefined) => void;
+  'qa'?: string;
+  'data-qa'?: string;
 };
 
 export const ToggleSwitch = forwardRef<HTMLElement, ToggleSwitchProps>(

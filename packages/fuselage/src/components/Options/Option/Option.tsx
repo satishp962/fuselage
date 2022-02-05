@@ -1,4 +1,4 @@
-import React, { Ref, ComponentProps, ReactNode } from 'react';
+import React, { Ref, ComponentProps, ReactNode, memo } from 'react';
 
 import { Icon } from '../..';
 import { Box } from '../../Box';
@@ -23,7 +23,7 @@ export type OptionProps = {
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-const Option = React.memo(
+const Option = memo(
   ({
     is: Tag = 'li',
     id,

@@ -94,6 +94,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "cssnano": "^5.0.6",
+    "csstype": "^3.0.10",
     "es-check": "^6.1.0",
     "eslint": "^8.2.0",
     "eslint-plugin-mdx": "^1.16.0",

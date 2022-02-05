@@ -1,6 +1,5 @@
 import React, {
   ComponentProps,
-  FC,
   forwardRef,
   SyntheticEvent,
   useCallback,
@@ -8,16 +7,16 @@ import React, {
 } from 'react';
 
 import { Flex } from '../Box';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 import { MultiSelect } from './MultiSelect';
 
 type MultiSelectFilteredProps = ComponentProps<typeof MultiSelect>;
 
-export const MultiSelectFiltered: FC<MultiSelectFilteredProps> = ({
+export const MultiSelectFiltered = ({
   options,
   placeholder,
   ...props
-}) => {
+}: MultiSelectFilteredProps) => {
   const [filter, setFilter] = useState('');
   const anchor = useCallback(
     forwardRef<HTMLInputElement, MultiSelectFilteredProps>(

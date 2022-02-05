@@ -18,6 +18,7 @@ export { default as Field } from './Field';
 export * from './FieldGroup';
 export * from './Grid';
 export * from './Icon';
+export { default as InputBox } from './InputBox';
 export * from './InputBox';
 export * from './Label';
 export { default as Margins } from './Margins';

@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import {
   useMutableCallback,
   useResizeObserver,
@@ -10,18 +13,22 @@ import React, {
   ComponentProps,
   FC,
   forwardRef,
+  ElementType,
+  memo,
 } from 'react';
 
 import { AnimatedVisibility, Box, Flex, Position } from '../Box';
 import Chip from '../Chip';
 import { Icon } from '../Icon';
-import { InputBox } from '../InputBox';
+import InputBox from '../InputBox';
 import Margins from '../Margins';
 import { useVisible } from '../Options/useVisible';
 import { OptionsPaginated } from '../OptionsPaginated';
 import { Focus, Addon } from '../Select';
 
-const SelectedOptions = React.memo((props) => (
+type SelectedOptionsProps = ComponentProps<typeof Chip>;
+
+const SelectedOptions = memo((props: SelectedOptionsProps) => (
   <Chip maxWidth='150px' withTruncatedText {...props} />
 ));
 
@@ -30,13 +37,20 @@ const prevent = (e: SyntheticEvent) => {
   e.stopPropagation();
   e.nativeEvent.stopImmediatePropagation();
 };
-type PaginatedMultiSelecOption = {
-  value?: string | number;
-  label?: string | number;
+
+type PaginatedMultiSelectOption = {
+  value: string | number;
+  label: string | number;
 };
-type PaginatedMultiSelectProps = ComponentProps<typeof Box> & {
+
+type PaginatedMultiSelectProps = Omit<ComponentProps<typeof Box>, 'value'> & {
+  withTitle?: string;
   error?: boolean;
-  options: PaginatedMultiSelecOption[];
+  options: PaginatedMultiSelectOption[];
+  anchor?: ElementType;
+  renderOptions?: ElementType;
+  endReached?: (index: number) => void;
+  value?: Exclude<PaginatedMultiSelectOption['value'], undefined>[];
 };
 
 export const PaginatedMultiSelect: FC<PaginatedMultiSelectProps> = ({
@@ -57,17 +71,17 @@ export const PaginatedMultiSelect: FC<PaginatedMultiSelectProps> = ({
 
   const currentValue = value !== undefined ? value : internalValue;
   const option = options.find(
-    (option: PaginatedMultiSelecOption) => option.value === currentValue
+    (option: PaginatedMultiSelectOption) => option.value === currentValue
   );
 
-  const internalChanged = ([value]: PaginatedMultiSelecOption[]) => {
+  const internalChanged = ([value]: PaginatedMultiSelectOption[]) => {
     if (
       currentValue.some(
-        (item: PaginatedMultiSelecOption) => item.value === value.value
+        (item: PaginatedMultiSelectOption) => item.value === value.value
       )
     ) {
       const newValue = currentValue.filter(
-        (item: PaginatedMultiSelecOption) => item.value !== value.value
+        (item: PaginatedMultiSelectOption) => item.value !== value.value
       );
       setInternalValue(newValue);
       return onChange(newValue);
@@ -125,13 +139,13 @@ export const PaginatedMultiSelect: FC<PaginatedMultiSelectProps> = ({
                     children={!value ? option || placeholder : null}
                   />
                   {currentValue.map(
-                    (value: PaginatedMultiSelecOption, index: number) => (
+                    (value: PaginatedMultiSelectOption, index: number) => (
                       <SelectedOptions
                         {...(withTitle && {
                           title:
                             value.label ||
                             options.find(
-                              (val: PaginatedMultiSelecOption) =>
+                              (val: PaginatedMultiSelectOption) =>
                                 val.value === value
                             )?.label,
                         })}
@@ -146,7 +160,7 @@ export const PaginatedMultiSelect: FC<PaginatedMultiSelectProps> = ({
                         children={
                           value.label ||
                           options.find(
-                            (val: PaginatedMultiSelecOption) =>
+                            (val: PaginatedMultiSelectOption) =>
                               val.value === value
                           )?.label
                         }
@@ -198,42 +212,43 @@ type PaginatedMultiSelectFilteredProps = Omit<
   ComponentProps<typeof Box>,
   'onChange'
 > & {
-  setFilter?: (value: PaginatedMultiSelecOption['value']) => void;
+  setFilter?: (value: PaginatedMultiSelectOption['value']) => void;
   placeholder: string;
   error?: boolean;
-  options: PaginatedMultiSelecOption[];
+  options: PaginatedMultiSelectOption[];
   filter?: string;
-  value?: PaginatedMultiSelecOption['value'];
+  value?: PaginatedMultiSelectOption['value'];
 };
 
-export const PaginatedMultiSelectFiltered: FC<PaginatedMultiSelectFilteredProps> =
-  ({ filter, setFilter, options, placeholder, ...props }) => {
-    const anchor = useCallback(
-      forwardRef<HTMLInputElement, ComponentProps<typeof InputBox>>(
-        ({ children, filter, ...props }, ref) => (
-          <Flex.Item grow={1}>
-            <InputBox.Input
-              ref={ref}
-              placeholder={placeholder}
-              value={filter}
-              onInput={(e: SyntheticEvent) =>
-                setFilter &&
-                setFilter((e.currentTarget as HTMLInputElement).value)
-              }
-              {...props}
-              rcx-input-box--undecorated
-            />
-          </Flex.Item>
-        )
-      ),
-      []
-    );
-    return (
-      <PaginatedMultiSelect
-        filter={filter}
-        options={options}
-        {...props}
-        anchor={anchor}
-      />
-    );
-  };
+export const PaginatedMultiSelectFiltered: FC<
+  PaginatedMultiSelectFilteredProps
+> = ({ filter, setFilter, options, placeholder, ...props }) => {
+  const anchor = useCallback(
+    forwardRef<HTMLInputElement, ComponentProps<typeof InputBox>>(
+      ({ children, filter, ...props }, ref) => (
+        <Flex.Item grow={1}>
+          <InputBox.Input
+            ref={ref}
+            placeholder={placeholder}
+            value={filter}
+            onInput={(e: SyntheticEvent) =>
+              setFilter &&
+              setFilter((e.currentTarget as HTMLInputElement).value)
+            }
+            {...props}
+            rcx-input-box--undecorated
+          />
+        </Flex.Item>
+      )
+    ),
+    []
+  );
+  return (
+    <PaginatedMultiSelect
+      filter={filter}
+      options={options}
+      {...props}
+      anchor={anchor}
+    />
+  );
+};

@@ -10,6 +10,7 @@ import React, {
   forwardRef,
   useMemo,
   ComponentProps,
+  ElementType,
 } from 'react';
 
 import { PositionAnimated, Box, AnimatedVisibility } from '../Box';
@@ -18,14 +19,6 @@ import { Options, useCursor } from '../Options';
 import { Option } from '../Options/useCursor';
 
 export type SelectOptions = readonly (readonly [string, string])[];
-
-export type SelectProps = Omit<ComponentProps<typeof Box>, 'onChange'> & {
-  error?: string;
-  options: SelectOptions;
-  onChange: (value: SelectOptions[number][0]) => void;
-  getLabel?: (params: SelectOptions[0]) => string;
-  filter?: string;
-};
 
 export const Addon = forwardRef<HTMLDivElement, ComponentProps<typeof Box>>(
   (props, ref) => <Box is='div' rcx-select__addon ref={ref} {...props} />
@@ -64,6 +57,18 @@ const useDidUpdate = (
   }, deps || []);
 };
 
+export type SelectProps = Omit<ComponentProps<typeof Box>, 'onChange'> & {
+  error?: string;
+  options: SelectOptions;
+  onChange?: (value: SelectOptions[number][0]) => void;
+  filter?: string;
+  anchor?: ElementType;
+  value?: string | [string, string] | number;
+  getLabel?: (option: SelectOptions[number]) => string;
+  getValue?: (option: SelectOptions[number]) => string;
+  renderOptions?: ElementType;
+};
+
 export const Select = forwardRef<HTMLInputElement, SelectProps>(
   (
     {
@@ -74,8 +79,10 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
       options = [],
       anchor: Anchor = Focus,
       onChange = () => {},
-      getValue = ([value]: string[] = []) => value,
-      getLabel = ([_, label]: readonly [string, string] = ['', '']) => label,
+      getValue = ([value]: readonly [value: string, label: string]) => value,
+      getLabel = (
+        [_, label]: readonly [value: string, label: string] = ['', '']
+      ) => label,
       placeholder = '',
       renderOptions: _Options = Options,
       ...props
@@ -83,7 +90,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(
     ref
   ) => {
     const [internalValue, setInternalValue] = useState<
-      string | string[] | number | undefined
+      string | [string, string] | number | undefined
     >(value);
 
     const currentValue = value !== undefined ? value : internalValue;

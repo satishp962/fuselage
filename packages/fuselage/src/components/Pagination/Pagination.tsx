@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {
   ComponentProps,
   Dispatch,
@@ -15,7 +14,11 @@ type PaginationProps = ComponentProps<typeof Box> & {
   current?: number;
   divider?: boolean;
   itemsPerPage?: 25 | 50 | 100;
-  itemsPerPageLabel?: () => string;
+  itemsPerPageLabel?: (props: {
+    count: number;
+    current: number;
+    itemsPerPage: 25 | 50 | 100;
+  }) => string;
   showingResultsLabel?: (props: {
     count: number;
     current: number;
@@ -32,9 +35,9 @@ const defaultShowingResultsLabel = ({
   current,
   itemsPerPage,
 }: {
-  count: PaginationProps['count'];
-  current: PaginationProps['current'];
-  itemsPerPage: PaginationProps['itemsPerPage'];
+  count: Exclude<PaginationProps['count'], undefined>;
+  current: Exclude<PaginationProps['current'], undefined>;
+  itemsPerPage: Exclude<PaginationProps['itemsPerPage'], undefined>;
 }) =>
   `Showing results ${current + 1} - ${Math.min(
     current + itemsPerPage,
@@ -52,7 +55,9 @@ export const Pagination: FC<PaginationProps> = ({
   divider,
   ...props
 }: PaginationProps) => {
-  const itemsPerPageOptions = [25, 50, 100].filter((i) => i <= count);
+  const itemsPerPageOptions = ([25, 50, 100] as const).filter(
+    (i) => i <= count
+  );
   const hasItemsPerPageSelection = itemsPerPageOptions.length > 1;
   const currentPage = Math.floor(current / itemsPerPage);
   const pages = Math.ceil(count / itemsPerPage);
@@ -87,8 +92,9 @@ export const Pagination: FC<PaginationProps> = ({
   const renderingContext = { count, pages, current, currentPage, itemsPerPage };
 
   const handleSetItemsPerPageLinkClick =
-    (itemsPerPageOption: PaginationProps['itemsPerPage']) => () => {
-      onSetItemsPerPage && onSetItemsPerPage(itemsPerPageOption);
+    (itemsPerPageOption: Exclude<PaginationProps['itemsPerPage'], undefined>) =>
+    () => {
+      onSetItemsPerPage?.(itemsPerPageOption);
     };
 
   const handleSetPageLinkClick = (page: number) => () => {
@@ -164,17 +170,4 @@ export const Pagination: FC<PaginationProps> = ({
       </Box>
     </Box>
   );
-};
-
-Pagination.defaultProps = {
-  current: 0,
-  itemsPerPage: 25,
-  itemsPerPageLabel: defaultItemsPerPageLabel,
-  showingResultsLabel: defaultShowingResultsLabel,
-};
-
-Pagination.propTypes = {
-  count: PropTypes.number.isRequired,
-  current: PropTypes.number,
-  itemsPerPage: PropTypes.oneOf([25, 50, 100]),
 };

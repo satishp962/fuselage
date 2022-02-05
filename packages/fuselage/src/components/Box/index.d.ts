@@ -5,7 +5,6 @@ import {
   ElementType,
   ForwardRefExoticComponent,
   PropsWithChildren,
-  ReactElement,
   RefAttributes,
   SVGAttributes,
 } from 'react';
@@ -29,15 +28,16 @@ type FontScale =
   | 'c2'
   | 'micro';
 
-type BoxProps<E extends HTMLElement> = PropsWithChildren<{
-  is?:
-    | ReactElement<E, string | JSXElementConstructor<E>>
-    | (ElementType<E> & string)
-    | string;
+type BoxProps<
+  TElementType extends ElementType<any> | keyof JSX.IntrinsicElements =
+    | ElementType<any>
+    | keyof JSX.IntrinsicElements
+> = PropsWithChildren<{
+  is?: TElementType;
   className?:
     | string
     | ReturnType<typeof css>
-    | (string | ReturnType<typeof css>)[];
+    | (string | ReturnType<typeof css> | boolean | undefined | null)[];
   style?: CSSProperties;
   border?: CSSProperties['border'];
   borderBlock?: CSSProperties['borderBlock'];
@@ -154,7 +154,9 @@ type BoxProps<E extends HTMLElement> = PropsWithChildren<{
   textTransform?: CSSProperties['textTransform'];
   textDecorationLine?: CSSProperties['textDecorationLine'];
 
+  animated?: boolean;
   elevation?: '0' | '1' | '2';
+  htmlSize?: AllHTMLAttributes<HTMLOrSVGElement>['size'];
   invisible?: boolean;
   withRichContent?: boolean | string;
   withTruncatedText?: boolean;
@@ -163,9 +165,9 @@ type BoxProps<E extends HTMLElement> = PropsWithChildren<{
   maxSize?: CSSProperties['blockSize'];
   fontScale?: FontScale;
 }> &
-  Omit<AllHTMLAttributes<HTMLOrSVGElement>, 'className' | 'size'> &
+  Omit<AllHTMLAttributes<HTMLElement>, 'className' | 'size' | 'is'> &
   Omit<SVGAttributes<SVGElement>, keyof AllHTMLAttributes<HTMLOrSVGElement>> &
-  RefAttributes<unknown>;
+  RefAttributes<any>;
 
 export const Box: ForwardRefExoticComponent<BoxProps>;
 

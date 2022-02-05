@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useContext, FC } from 'react';
 
 import { Box } from '../Box';
@@ -26,12 +25,4 @@ export const TableCell: FC<TableCellProps> = ({
       {...props}
     />
   );
-};
-
-TableCell.propTypes = {
-  align: PropTypes.oneOfType([
-    PropTypes.oneOf(['start', 'end', 'center', 'justify']),
-    PropTypes.object,
-  ]),
-  fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };
