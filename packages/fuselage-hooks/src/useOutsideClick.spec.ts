@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { useOutsideClick } from './useOutsideClick';
 
-it('it should call the callback when the user clicked outside the element', () => {
+it('it should call the callback when the user clicked outside the element', async () => {
   const ref = { current: document.createElement('div') };
   const cb = jest.fn();
   renderHook(() => useOutsideClick([ref], cb));
@@ -14,11 +14,11 @@ it('it should call the callback when the user clicked outside the element', () =
   document.body.appendChild(sibling);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(sibling);
+  await userEvent.click(sibling);
   expect(cb).toHaveBeenCalled();
 });
 
-it('it should call the callback when the user clicked outside the elements', () => {
+it('it should call the callback when the user clicked outside the elements', async () => {
   const ref = { current: document.createElement('div') };
   const ref2 = { current: null };
   const cb = jest.fn();
@@ -33,11 +33,11 @@ it('it should call the callback when the user clicked outside the elements', () 
   document.body.appendChild(sibling);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(sibling);
+  await userEvent.click(sibling);
   expect(cb).toHaveBeenCalled();
 });
 
-it('it should not call the callback when the user clicked inside the element', () => {
+it('it should not call the callback when the user clicked inside the element', async () => {
   const ref = { current: document.createElement('div') };
   const cb = jest.fn();
   renderHook(() => useOutsideClick([ref], cb));
@@ -45,11 +45,11 @@ it('it should not call the callback when the user clicked inside the element', (
   document.body.appendChild(ref.current);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(ref.current);
+  await userEvent.click(ref.current);
   expect(cb).not.toHaveBeenCalled();
 });
 
-it('it should not call the callback when the user clicked inside the elements', () => {
+it('it should not call the callback when the user clicked inside the elements', async () => {
   const ref = { current: document.createElement('div') };
   const ref2 = { current: null };
   const cb = jest.fn();
@@ -61,11 +61,11 @@ it('it should not call the callback when the user clicked inside the elements', 
   document.body.appendChild(element2);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(ref.current);
+  await userEvent.click(ref.current);
   expect(cb).not.toHaveBeenCalled();
 });
 
-it('it should not call the callback when the user clicked inside the element and their children', () => {
+it('it should not call the callback when the user clicked inside the element and their children', async () => {
   const ref = { current: document.createElement('div') };
   const cb = jest.fn();
   renderHook(() => useOutsideClick([ref], cb));
@@ -76,11 +76,11 @@ it('it should not call the callback when the user clicked inside the element and
   document.body.appendChild(ref.current);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(child);
+  await userEvent.click(child);
   expect(cb).not.toHaveBeenCalled();
 });
 
-it('it should not call the callback when the user clicked inside of some given element and their children', () => {
+it('it should not call the callback when the user clicked inside of some given element and their children', async () => {
   const ref = { current: document.createElement('div') };
   const ref2 = { current: null };
   const cb = jest.fn();
@@ -94,6 +94,6 @@ it('it should not call the callback when the user clicked inside of some given e
   document.body.appendChild(element2);
 
   expect(cb).not.toHaveBeenCalled();
-  userEvent.click(child);
+  await userEvent.click(child);
   expect(cb).not.toHaveBeenCalled();
 });

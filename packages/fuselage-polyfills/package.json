@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "^3.3.1",
-    "clipboard-polyfill": "^3.0.3",
+    "clipboard-polyfill": "^4.0.0-rc1",
     "element-closest-polyfill": "^1.0.4",
     "focus-visible": "^5.2.0",
     "focus-within-polyfill": "^5.2.1",
@@ -31,9 +31,9 @@
   "devDependencies": {
     "@rocket.chat/eslint-config-alt": "workspace:~",
     "@rocket.chat/prettier-config": "workspace:~",
-    "eslint": "~8.8.0",
+    "eslint": "~8.12.0",
     "lint-all": "workspace:~",
-    "lint-staged": "~12.3.3",
-    "prettier": "~2.5.1"
+    "lint-staged": "~12.3.7",
+    "prettier": "~2.6.1"
   }
 }
