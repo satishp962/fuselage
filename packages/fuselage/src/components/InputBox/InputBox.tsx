@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 import { useMergedRefs } from '@rocket.chat/fuselage-hooks';
 import type {
+  ChangeEvent,
   ComponentProps,
   ForwardRefExoticComponent,
   ReactNode,
@@ -15,13 +16,14 @@ import { Addon } from './Addon';
 import type { Option } from './Option';
 import type { Placeholder } from './Placeholder';
 
-type InputBoxProps = ComponentProps<typeof Box> & {
+type InputBoxProps = Omit<ComponentProps<typeof Box>, 'onChange'> & {
   addon?: ReactNode;
   input?: ReactNode;
   multiple?: boolean;
   error?: string;
   placeholder?: string;
   placeholderVisible?: boolean;
+  onChange: (e: ChangeEvent<HTMLElement>) => void;
   type:
     | 'button'
     | 'checkbox'
