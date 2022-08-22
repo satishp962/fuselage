@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import React, { Fragment } from 'react';
 
 import ActionsBlock from '../blocks/ActionsBlock';
+import CodeEditorBlock from '../blocks/CodeEditorBlock';
 import ContextBlock from '../blocks/ContextBlock';
 import DividerBlock from '../blocks/DividerBlock';
 import ImageBlock from '../blocks/ImageBlock';
@@ -343,23 +344,22 @@ export class FuselageSurfaceRenderer extends UiKit.SurfaceRenderer<ReactElement>
     );
   }
 
-  // code_editor(
-  //   block: UiKit.CodeEditorBlock,
-  //   context: UiKit.BlockContext,
-  //   index: number
-  // ): ReactElement | null {
-  //   if (context === UiKit.BlockContext.BLOCK) {
-  //     return null;
-  //   }
+  code_editor(
+    block: UiKit.CodeEditorBlock,
+    context: UiKit.BlockContext,
+    index: number
+  ): ReactElement | null {
+    if (context === UiKit.BlockContext.BLOCK) {
+      return null;
+    }
 
-  //   return (
-  //     <CodeEditorBlock
-  //       key={block.actionId || index}
-  //       block={block}
-  //       context={context}
-  //       index={index}
-  //       surfaceRenderer={this}
-  //     />
-  //   );
-  // }
+    return (
+      <CodeEditorBlock
+        block={block}
+        context={context}
+        index={index}
+        surfaceRenderer={this}
+      />
+    );
+  }
 }

@@ -1,20 +1,14 @@
-// import type * as UiKit from '@rocket.chat/ui-kit';
-// import type { ReactElement } from 'react';
-// import React, { memo } from 'react';
-// import { CodeEditor } from '@rocket.chat/fuselage/src/components/CodeEditor'
-// import type { BlockProps } from '../utils/BlockProps';
+import { CodeEditor } from '@rocket.chat/fuselage/src/components/CodeEditor';
+import type * as UiKit from '@rocket.chat/ui-kit';
+import type { ReactElement } from 'react';
+import React, { memo } from 'react';
 
-// type CodeEditorElementProps = BlockProps<UiKit.CodeEditorElement>;
+import type { BlockProps } from '../utils/BlockProps';
 
-// const CodeEditorElement = ({
-//   block,
-// }: CodeEditorElementProps): ReactElement => {
+type CodeEditorElementProps = BlockProps<UiKit.CodeEditorElement>;
 
-//   return (
-//     <CodeEditor
-//         initialValue={block.initialValue}
-//     />
-//   );
-// };
+const CodeEditorElement = ({ block }: CodeEditorElementProps): ReactElement => (
+  <CodeEditor initialValue={block.initialValue} />
+);
 
-// export default memo(CodeEditorElement);
+export default memo(CodeEditorElement);

@@ -192,3 +192,5 @@ export const InputWithLinearScale = createStory(payloads.inputWithLinearScale, {
 });
 
 export const Conditional = createStory(payloads.conditional);
+
+export const CodeEditor = createStory(payloads.code_editor);
