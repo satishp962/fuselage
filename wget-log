@@ -1,0 +1,24 @@
+Connecting to update.code.visualstudio.com (update.code.visualstudio.com)|20.43.132.130|:443... failed: Resource temporarily unavailable.
+Retrying.
+
+--2022-08-18 12:58:33--  (try: 2)  https://update.code.visualstudio.com/commit:e4503b30fc78200f846c62cf8091b76ff5547662/server-linux-x64/stable
+Connecting to update.code.visualstudio.com (update.code.visualstudio.com)|20.43.132.130|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://az764295.vo.msecnd.net/stable/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-linux-x64.tar.gz [following]
+--2022-08-18 12:59:29--  https://az764295.vo.msecnd.net/stable/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-linux-x64.tar.gz
+Resolving az764295.vo.msecnd.net (az764295.vo.msecnd.net)... 117.18.232.200
+Connecting to az764295.vo.msecnd.net (az764295.vo.msecnd.net)|117.18.232.200|:443... failed: Resource temporarily unavailable.
+Retrying.
+
+--2022-08-18 13:00:10--  (try: 2)  https://az764295.vo.msecnd.net/stable/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-linux-x64.tar.gz
+Connecting to az764295.vo.msecnd.net (az764295.vo.msecnd.net)|117.18.232.200|:443... failed: Resource temporarily unavailable.
+Retrying.
+
+--2022-08-18 13:00:38--  (try: 3)  https://az764295.vo.msecnd.net/stable/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-linux-x64.tar.gz
+Connecting to az764295.vo.msecnd.net (az764295.vo.msecnd.net)|117.18.232.200|:443... connected.
+HTTP request sent, awaiting response... No data received.
+Retrying.
+
+--2022-08-18 13:01:29--  (try: 4)  https://az764295.vo.msecnd.net/stable/e4503b30fc78200f846c62cf8091b76ff5547662/vscode-server-linux-x64.tar.gz
+Connecting to az764295.vo.msecnd.net (az764295.vo.msecnd.net)|117.18.232.200|:443... failed: Network is unreachable.
+Resolving az764295.vo.msecnd.net (az764295.vo.msecnd.net)... failed: Temporary failure in name resolution.

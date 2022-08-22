@@ -71,3 +71,5 @@ export {
 export { SurfaceRenderer } from './rendering/SurfaceRenderer';
 export { ActionableElement } from './blocks/ActionableElement';
 export { ActionOf } from './rendering/ActionOf';
+export { CodeEditorElement } from './blocks/elements/CodeEditorElement';
+export { CodeEditorBlock } from './blocks/layout/CodeEditorBlock';

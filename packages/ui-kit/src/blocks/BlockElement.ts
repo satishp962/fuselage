@@ -1,5 +1,6 @@
 import type { ButtonElement } from './elements/ButtonElement';
 import type { ChannelsSelectElement } from './elements/ChannelsSelectElement';
+import type { CodeEditorElement } from './elements/CodeEditorElement';
 import type { ConversationsSelectElement } from './elements/ConversationsSelectElement';
 import type { DatePickerElement } from './elements/DatePickerElement';
 import type { ImageElement } from './elements/ImageElement';
@@ -27,4 +28,5 @@ export type BlockElement =
   | OverflowElement
   | PlainTextInputElement
   | StaticSelectElement
-  | UsersSelectElement;
+  | UsersSelectElement
+  | CodeEditorElement;

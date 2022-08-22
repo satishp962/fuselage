@@ -5,4 +5,5 @@ export enum BlockContext {
   ACTION,
   FORM,
   CONTEXT,
+  CODE_EDITOR,
 }

@@ -28,6 +28,7 @@ export class FuselageSurfaceRenderer extends UiKit.SurfaceRenderer<ReactElement>
       'input',
       'section',
       'preview',
+      'code_editor',
     ]);
   }
 
@@ -341,4 +342,24 @@ export class FuselageSurfaceRenderer extends UiKit.SurfaceRenderer<ReactElement>
       />
     );
   }
+
+  // code_editor(
+  //   block: UiKit.CodeEditorBlock,
+  //   context: UiKit.BlockContext,
+  //   index: number
+  // ): ReactElement | null {
+  //   if (context === UiKit.BlockContext.BLOCK) {
+  //     return null;
+  //   }
+
+  //   return (
+  //     <CodeEditorBlock
+  //       key={block.actionId || index}
+  //       block={block}
+  //       context={context}
+  //       index={index}
+  //       surfaceRenderer={this}
+  //     />
+  //   );
+  // }
 }

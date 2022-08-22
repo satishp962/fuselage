@@ -28,6 +28,9 @@ const getBlockElementRenderer = <T>(
 
     case 'linear_scale':
       return renderers.linearScale as BlockElementRenderer<T> | undefined;
+
+    case 'code_editor':
+      return renderers.codeEditor as BlockElementRenderer<T> | undefined;
   }
 };
 

@@ -9,6 +9,7 @@ export enum LayoutBlockType {
   INPUT = 'input',
   CONDITIONAL = 'conditional',
   PREVIEW = 'preview',
+  CODE_EDITOR = 'code_editor',
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,6 +1,7 @@
 import type { BlockElement } from '../blocks/BlockElement';
 import type { RenderableLayoutBlock } from '../blocks/RenderableLayoutBlock';
 import type { TextObject } from '../blocks/TextObject';
+import type { CodeEditorElement } from '../blocks/elements/CodeEditorElement';
 import type { DatePickerElement } from '../blocks/elements/DatePickerElement';
 import type { LinearScaleElement } from '../blocks/elements/LinearScaleElement';
 import type { MultiStaticSelectElement } from '../blocks/elements/MultiStaticSelectElement';
@@ -38,4 +39,6 @@ export type BlockRenderers<T> = {
 
   /** @deprecated */
   linearScale?: BlockElementRenderer<T, LinearScaleElement>;
+
+  codeEditor?: BlockElementRenderer<T, CodeEditorElement>;
 };

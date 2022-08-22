@@ -1,4 +1,5 @@
 import type { ActionsBlock } from './layout/ActionsBlock';
+import type { CodeEditorBlock } from './layout/CodeEditorBlock';
 import type { ConditionalBlock } from './layout/ConditionalBlock';
 import type { ContextBlock } from './layout/ContextBlock';
 import type { DividerBlock } from './layout/DividerBlock';
@@ -16,4 +17,5 @@ export type LayoutBlock =
   | ImageBlock
   | InputBlock
   | SectionBlock
-  | PreviewBlock;
+  | PreviewBlock
+  | CodeEditorBlock;
