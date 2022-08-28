@@ -193,4 +193,6 @@ export const InputWithLinearScale = createStory(payloads.inputWithLinearScale, {
 
 export const Conditional = createStory(payloads.conditional);
 
-export const CodeEditor = createStory(payloads.code_editor);
+export const CodeEditor = createStory(payloads.code_editor, {
+  'input-0': 'Error',
+});

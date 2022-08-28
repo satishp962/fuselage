@@ -286,6 +286,15 @@ class TestParser extends UiKitParserBanner<unknown> {
       ),
     },
   });
+
+  code_editor = (element: any, context: any, index: any): any => ({
+    component: 'code_editor',
+    props: {
+      key: index,
+      block: context === BlockContext.BLOCK,
+      initialValue: element.initialValue || '',
+    },
+  });
 }
 
 const parser = new TestParser();
@@ -1946,5 +1955,26 @@ describe('conditional', () => {
     ];
 
     expect(conditionalParse(blocks)).toStrictEqual([]);
+  });
+});
+
+describe('code_editor', () => {
+  it('renders', () => {
+    const payload = [
+      {
+        type: 'code_editor',
+        initialValue: 'let a = 1;',
+      },
+    ];
+    expect(parse(payload)).toStrictEqual([
+      {
+        component: 'code_editor',
+        props: {
+          key: 0,
+          initialValue: 'let a = 1;',
+          block: true,
+        },
+      },
+    ]);
   });
 });

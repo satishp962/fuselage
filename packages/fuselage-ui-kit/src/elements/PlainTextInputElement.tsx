@@ -1,4 +1,4 @@
-import { TextAreaInput, TextInput } from '@rocket.chat/fuselage';
+import { TextInput, CodeEditor } from '@rocket.chat/fuselage';
 import type * as UiKit from '@rocket.chat/ui-kit';
 import type { ReactElement } from 'react';
 import React, { memo } from 'react';
@@ -17,22 +17,7 @@ const PlainTextInputElement = ({
   const [{ loading, value, error }, action] = useUiKitState(block, context);
 
   if (block.multiline) {
-    return (
-      <TextAreaInput
-        disabled={loading}
-        id={block.actionId}
-        name={block.actionId}
-        rows={6}
-        error={error}
-        value={value}
-        onChange={action}
-        placeholder={
-          block.placeholder
-            ? fromTextObjectToString(surfaceRenderer, block.placeholder, 0)
-            : undefined
-        }
-      />
-    );
+    return <CodeEditor initialValue={block?.initialValue || ''} key={101019} />;
   }
 
   return (

@@ -72,3 +72,4 @@ export * from './ToastBar';
 export * from './ToggleSwitch';
 export { default as Tooltip } from './Tooltip';
 export { default as UrlInput } from './UrlInput';
+export { default as CodeEditor } from './CodeEditor';
